@@ -1,4 +1,6 @@
-package sample;
+package sample.gameObject;
+
+import sample.utils.Position;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,8 +21,8 @@ public class Player implements Runnable {
         int x, y;
         Position position;
         do {
-            x = (int) Math.round(Math.random() * field.getSizeX());
-            y = (int) Math.round(Math.random() * field.getSizeY());
+            x = (int) Math.round(Math.random() * (field.getSizeX() - 1));
+            y = (int) Math.round(Math.random() * (field.getSizeY() - 1));
             position = new Position(x, y);
         } while (field.notFreePosition(position));
         this.ball = new Ball(position, Thread.currentThread().getName());

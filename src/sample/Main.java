@@ -3,23 +3,23 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.controlers.Controller;
+import sample.utils.Position;
 
 import java.util.ArrayList;
 
 public class Main extends Application {
 
     //ЕСЛИ ПОМЕНЯТЬ КОЛ-ВО СЕКТОРОВ, ТО ПОЛЕ БУДЕТ ИЗМЕНЯТЬСЯ
-    private static final int COUNT_SECTORS = 5;
+    private static final int COUNT_SECTORS = 3;
     private static final int ROOT_SIZE = 500;
-    private static final int COUNT_THREADS = 10;
+    private static final int COUNT_THREADS = 4;
 
     @Override
     public void start(Stage primaryStage) {

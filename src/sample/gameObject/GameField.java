@@ -1,4 +1,6 @@
-package sample;
+package sample.gameObject;
+
+import sample.utils.Position;
 
 import java.util.HashSet;
 import java.util.Set;

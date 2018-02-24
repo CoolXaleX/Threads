@@ -1,4 +1,9 @@
-package sample;
+package sample.controlers;
+
+import sample.gameObject.Ball;
+import sample.gameObject.GameField;
+import sample.gameObject.Player;
+import sample.utils.Position;
 
 import java.util.ArrayList;
 import java.util.Set;

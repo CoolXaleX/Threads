@@ -1,4 +1,6 @@
-package sample;
+package sample.gameObject;
+
+import sample.utils.Position;
 
 public class Ball {
     private Position position;
