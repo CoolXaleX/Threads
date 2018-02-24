@@ -2,18 +2,19 @@ package sample;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class GameField {
     private int sizeX;
     private int sizeY;
-    private double centerSize;
-    Set<Ball> balls;
+    private final Set<Ball> balls;
+    private ReentrantLock lock;
 
-    public GameField(int size, double centerSize) {
+    public GameField(int size, ReentrantLock lock) {
         this.sizeX = size;
         this.sizeY = size;
-        this.centerSize = centerSize;
         this.balls = new HashSet<>();
+        this.lock = lock;
     }
 
     public int getSizeX() {
@@ -24,23 +25,34 @@ public class GameField {
         return sizeY;
     }
 
-    public double getCenterSize() {
-        return centerSize;
+    public void addBall(Ball ball) {
+        synchronized (this.balls) {
+            balls.add(ball);
+        }
     }
 
-    public synchronized void addBall(Ball ball){
-        balls.add(ball);
-    }
-    
-    public synchronized boolean freePosition(Position position){
+    public boolean notFreePosition(Position position) {
         boolean result = true;
-        for (Ball ball: balls
-             ) {
-            if(ball.getPosition().equals(position)){
-                result = false;
+        synchronized (this.balls) {
+            try {
+                lock.lock();
+                for (Ball ball : balls
+                        ) {
+                    if (ball.getPosition().equals(position)) {
+                        result = false;
+                    }
+                }
+            } finally {
+                lock.unlock();
             }
         }
-        return result;
+        return !result;
+    }
+
+    public Set<Ball> getBalls() {
+        synchronized (this.balls) {
+            return this.balls;
+        }
     }
 
 }
