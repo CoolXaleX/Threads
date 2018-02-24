@@ -28,9 +28,14 @@ public class Controller {
     public ArrayList<Position> getPositions() {
         Set<Ball> set = gameField.getBalls();
         ArrayList<Position> list = new ArrayList<>();
-        for (Ball ball : set
-                ) {
-            list.add(ball.getPosition());
+        try {
+            this.lock.lock();
+            for (Ball ball : set
+                    ) {
+                list.add(ball.getPosition());
+            }
+        }finally {
+            this.lock.unlock();
         }
         return list;
     }
